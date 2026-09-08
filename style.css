@@ -121,6 +121,11 @@ button {
   font-size: 14px;
 }
 
+.view-head__actions {
+  display: flex;
+  gap: 10px;
+}
+
 .btn--danger:hover { border-color: var(--accent-coral); }
 
 .panel {
