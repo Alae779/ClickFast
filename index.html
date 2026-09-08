@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click Fast!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <!-- ============ VIEW: HOME ============ -->
+  <section id="view-home" class="view view--active">
+    <div class="view__inner view__inner--home">
+
+      <header class="brand">
+        <span class="brand__mark">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="12" stroke="var(--accent-gold)" stroke-width="2"/>
+            <circle cx="14" cy="14" r="6" stroke="var(--accent-gold)" stroke-width="2"/>
+            <circle cx="14" cy="14" r="1.5" fill="var(--accent-gold)"/>
+          </svg>
+        </span>
+        <span class="brand__name">Click Fast!</span>
+      </header>
+
+      <div class="home-hero">
+        <h1 class="home-hero__title">
+          Fast eyes.<br>
+          Faster hands.
+        </h1>
+        <p class="home-hero__lede">
+          A reflex &amp; precision drill from Nova Arcade Studio. A target appears,
+          you chase it, the clock doesn't wait.
+        </p>
+
+        <div class="home-hero__actions">
+          <button class="btn btn--primary" id="btn-start" type="button">Start playing</button>
+          <button class="btn btn--ghost" id="btn-view-history" type="button">View history</button>
+        </div>
+      </div>
+
+      <div class="home-grid">
+        <div class="panel panel--record">
+          <span class="panel__label">Current record</span>
+          <span class="stat-number stat-number--lg">128</span>
+          <span class="panel__caption">Classic · Medium · 10s</span>
+        </div>
+
+        <div class="panel panel--rules">
+          <span class="panel__label">How it works</span>
+          <ul class="rules-list">
+            <li>
+              <span class="rules-list__index">01</span>
+              Set your name, mode, duration and target size.
+            </li>
+            <li>
+              <span class="rules-list__index">02</span>
+              Hit the target before time runs out — it jumps after every hit.
+            </li>
+            <li>
+              <span class="rules-list__index">03</span>
+              Precision mode also tracks your misses and accuracy.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ VIEW: CONFIG ============ -->
+  <section id="view-config" class="view">
+    <div class="view__inner">
+
+      <div class="view-head">
+        <h2 class="view-head__title">Set up your run</h2>
+        <p class="view-head__sub">These settings lock in once the round starts.</p>
+      </div>
+
+      <form class="config-form">
+
+        <div class="field">
+          <label class="field__label" for="pseudo">Player name</label>
+          <input class="field__input" id="pseudo" name="pseudo" type="text" placeholder="2–20 characters" maxlength="20">
+        </div>
+
+        <div class="field">
+          <span class="field__label">Mode</span>
+          <div class="pill-group" role="group" aria-label="Game mode">
+            <button class="pill pill--selected" type="button">Classic</button>
+            <button class="pill" type="button">Precision</button>
+            <button class="pill" type="button">Challenge</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field__label">Duration</span>
+          <div class="pill-group" role="group" aria-label="Round duration">
+            <button class="pill pill--selected" type="button">10s</button>
+            <button class="pill" type="button">20s</button>
+            <button class="pill" type="button">30s</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field__label">Difficulty</span>
+          <div class="pill-group" role="group" aria-label="Target difficulty">
+            <button class="pill" type="button">Easy</button>
+            <button class="pill pill--selected" type="button">Medium</button>
+            <button class="pill" type="button">Hard</button>
+          </div>
+          <p class="field__hint">Medium targets are 60×60px — the standard calibration.</p>
+        </div>
+
+        <div class="config-form__actions">
+          <button class="btn btn--ghost" id="btn-config-back" type="button">Back</button>
+          <button class="btn btn--primary" id="btn-config-start" type="submit">Start round</button>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ============ VIEW: GAME ============ -->
+  <section id="view-game" class="view">
+    <div class="view__inner view__inner--game">
+
+      <div class="hud">
+        <div class="hud__stat">
+          <span class="hud__label">Time</span>
+          <span class="stat-number">08</span>
+        </div>
+        <div class="hud__stat">
+          <span class="hud__label">Score</span>
+          <span class="stat-number stat-number--accent">14</span>
+        </div>
+        <div class="hud__stat">
+          <span class="hud__label">Record</span>
+          <span class="stat-number">128</span>
+        </div>
+        <div class="hud__stat">
+          <span class="hud__label">Misses</span>
+          <span class="stat-number stat-number--danger">3</span>
+        </div>
+        <div class="hud__stat">
+          <span class="hud__label">Accuracy</span>
+          <span class="stat-number">82%</span>
+        </div>
+      </div>
+
+      <div class="arena">
+        <span class="arena__corner arena__corner--tl"></span>
+        <span class="arena__corner arena__corner--tr"></span>
+        <span class="arena__corner arena__corner--bl"></span>
+        <span class="arena__corner arena__corner--br"></span>
+
+        <button class="target" type="button" aria-label="Target" style="width:60px; height:60px; top:180px; left:260px;"></button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ VIEW: RESULTS ============ -->
+  <section id="view-results" class="view">
+    <div class="view__inner">
+
+      <div class="view-head">
+        <span class="results-badge">New record</span>
+        <h2 class="view-head__title">Round complete</h2>
+        <p class="view-head__sub">Classic · Medium · 10s — played as Nova</p>
+      </div>
+
+      <div class="results-grid">
+        <div class="panel panel--result">
+          <span class="panel__label">Score</span>
+          <span class="stat-number stat-number--xl stat-number--accent">31</span>
+        </div>
+        <div class="panel panel--result">
+          <span class="panel__label">Misses</span>
+          <span class="stat-number stat-number--xl">Not measured</span>
+        </div>
+        <div class="panel panel--result">
+          <span class="panel__label">Accuracy</span>
+          <span class="stat-number stat-number--xl">Not measured</span>
+        </div>
+      </div>
+
+      <div class="config-form__actions">
+        <button class="btn btn--ghost" id="btn-results-home" type="button">Back home</button>
+        <button class="btn btn--primary" id="btn-results-again" type="button">Play again</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ VIEW: HISTORY ============ -->
+  <section id="view-history" class="view">
+    <div class="view__inner">
+
+      <div class="view-head view-head--row">
+        <div>
+          <h2 class="view-head__title">History</h2>
+          <p class="view-head__sub">Your last 20 sessions, most recent first.</p>
+        </div>
+        <button class="btn btn--danger" id="btn-history-clear" type="button">Clear history</button>
+      </div>
+
+      <div class="pill-group pill-group--filter" role="group" aria-label="Filter by mode">
+        <button class="pill pill--selected" type="button">All</button>
+        <button class="pill" type="button">Classic</button>
+        <button class="pill" type="button">Precision</button>
+        <button class="pill" type="button">Challenge</button>
+      </div>
+
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Mode</th>
+            <th>Difficulty</th>
+            <th>Duration</th>
+            <th>Score</th>
+            <th>Accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nova</td>
+            <td>Precision</td>
+            <td>Hard</td>
+            <td>20s</td>
+            <td class="history-table__score">27</td>
+            <td>76%</td>
+          </tr>
+          <tr>
+            <td>Nova</td>
+            <td>Classic</td>
+            <td>Medium</td>
+            <td>10s</td>
+            <td class="history-table__score">31</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Nova</td>
+            <td>Challenge</td>
+            <td>Easy</td>
+            <td>30s</td>
+            <td class="history-table__score">54</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+
+</body>
+</html>
