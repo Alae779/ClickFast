@@ -90,16 +90,15 @@
 
         <div class="field">
           <span class="field__label">Mode</span>
-          <div class="pill-group" role="group" aria-label="Game mode">
+          <div class="pill-group" role="group" aria-label="Game mode" data-setting="mode">
             <button class="pill pill--selected" type="button">Classic</button>
             <button class="pill" type="button">Precision</button>
-            <button class="pill" type="button">Challenge</button>
           </div>
         </div>
 
         <div class="field">
           <span class="field__label">Duration</span>
-          <div class="pill-group" role="group" aria-label="Round duration">
+          <div class="pill-group" role="group" aria-label="Round duration" data-setting="duration">
             <button class="pill pill--selected" type="button">10s</button>
             <button class="pill" type="button">20s</button>
             <button class="pill" type="button">30s</button>
@@ -108,7 +107,7 @@
 
         <div class="field">
           <span class="field__label">Difficulty</span>
-          <div class="pill-group" role="group" aria-label="Target difficulty">
+          <div class="pill-group" role="group" aria-label="Target difficulty" data-setting="difficulty">
             <button class="pill" type="button">Easy</button>
             <button class="pill pill--selected" type="button">Medium</button>
             <button class="pill" type="button">Hard</button>
@@ -132,12 +131,12 @@
 
       <div class="hud">
         <div class="hud__stat">
-          <span class="hud__label">Time</span>
-          <span class="stat-number">08</span>
+          <span class="hud__label" id="time-display">Time</span>
+          <span class="stat-number">10</span>
         </div>
         <div class="hud__stat">
           <span class="hud__label">Score</span>
-          <span class="stat-number stat-number--accent">14</span>
+          <span class="stat-number stat-number--accent" id="score-display">0</span>
         </div>
         <div class="hud__stat">
           <span class="hud__label">Record</span>
@@ -217,7 +216,6 @@
         <button class="pill pill--selected" type="button">All</button>
         <button class="pill" type="button">Classic</button>
         <button class="pill" type="button">Precision</button>
-        <button class="pill" type="button">Challenge</button>
       </div>
 
       <table class="history-table">

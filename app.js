@@ -1,3 +1,13 @@
+let settings = {
+  mode: "Classic",
+  duration: 10,
+  difficulty: "Medium"
+};
+
+let score = 0;
+
+let timeLeft = 10;
+
 let sections = document.querySelectorAll(".view");
 
 function showView(viewId){
@@ -40,3 +50,48 @@ btnConfigStart.addEventListener("click", (e) => {
 btnHistoryBack.addEventListener("click", (e) => {
     showView("view-home");
 });
+
+
+function selectPill(clickedPill){
+    const group = clickedPill.parentElement;
+    const pillsInGroup = group.querySelectorAll(".pill");
+
+    pillsInGroup.forEach(pill => {
+        pill.classList.remove("pill--selected");
+    })
+    clickedPill.classList.add("pill--selected");
+
+    const key = group.dataset.setting;
+    if(key){
+        settings[key] = clickedPill.textContent;
+    }
+}
+
+const allPills = document.querySelectorAll(".pill");
+allPills.forEach(pill =>{
+    pill.addEventListener("click", (e) => {
+        selectPill(pill);
+    })
+})
+
+let target = document.querySelector(".target");
+
+function moveTarget(){
+    let arenaSize = 500;
+    let targetSize = 60;
+    let maxPosition = arenaSize - targetSize;
+
+    let randomX = Math.floor(Math.random() * maxPosition);
+    let randomY = Math.floor(Math.random() * maxPosition);
+
+    target.style.top = `${randomY}px`;
+    target.style.left = `${randomX}px`;
+}
+
+let scoreDisplay = document.getElementById("score-display");
+
+target.addEventListener("click", (e) => {
+    score++;
+    scoreDisplay.textContent = score;
+    moveTarget();
+})
