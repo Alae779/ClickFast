@@ -31,6 +31,13 @@ if(saved){
 syncPillsFromSettings();
 hintInfos();
 
+let history = [];
+
+let savedHistory = localStorage.getItem("clickFast.history");
+if (savedHistory) {
+    history = JSON.parse(savedHistory);
+}
+
 
 let score = 0;
 
@@ -71,6 +78,7 @@ const btnResultsAgain = document.getElementById("btn-results-again");
 const btnConfigStart = document.getElementById("btn-config-start");
 const btnHistoryBack = document.getElementById("btn-history-back");
 const btnResults = document.getElementById("view-results");
+let btnHistoryClear = document.getElementById("btn-history-clear");
 
 let scoreDisplay = document.getElementById("score-display");
 let resultsScoreDisplay = document.getElementById("results-score");
@@ -89,13 +97,18 @@ let timeDisplay = document.getElementById("time-display");
 let pseudoInput = document.getElementById("pseudo");
 let pseudoError = document.getElementById("pseudo-error");
 
-
+btnHistoryClear.addEventListener("click", (e) => {
+    history = [];
+    localStorage.removeItem("clickFast.history");
+    renderHistory();
+});
 
 
 btnStart.addEventListener("click", (e) => {
     showView("view-config");
 })
 btnViewHistory.addEventListener("click", (e) => {
+    renderHistory();
     showView("view-history");
 })
 btnConfigBack.addEventListener("click", (e) => {
@@ -109,7 +122,7 @@ btnResultsAgain.addEventListener("click", (e) => {
 })
     btnConfigStart.addEventListener("click", (e) => {
         e.preventDefault();
-        if(settings.mode === "classic"){
+        if(settings.mode === "Classic"){
             recordDisplay.textContent = records.classic;
         }else{
             recordDisplay.textContent = records.precision;
@@ -155,6 +168,9 @@ btnResultsAgain.addEventListener("click", (e) => {
                     if(settings.mode === "Precision"){
                         resultsMissesDisplay.textContent = misses;
                         resultsAccuracyDisplay.textContent = `${Math.round(accuracy)}%`;
+                    }else{
+                        resultsMissesDisplay.textContent = "Not measured";
+                        resultsAccuracyDisplay.textContent = "Not measured";
                     }
                     resultsSub.textContent = `${settings.mode} · ${settings.difficulty} · ${settings.duration}s — played as ${pseudoValue}`;
                     showView("view-results");
@@ -184,7 +200,11 @@ btnResultsAgain.addEventListener("click", (e) => {
                         score: score,
                         accuracy: settings.mode === "Precision" ? `${Math.round(accuracy)}%` : "Not measured"
                     }
-                    localStorage.setItem
+                    history.unshift(session);
+                    if(history.length > 5){
+                        history.pop();
+                    }
+                    localStorage.setItem("clickFast.history", JSON.stringify(history));
                     clearInterval(timerID);
 
                 };
@@ -298,3 +318,19 @@ function syncPillsFromSettings() {
     });
 }
 
+function renderHistory(){
+    let historyTableBody = document.querySelector(".history-table tbody");
+    historyTableBody.innerHTML = "";
+    history.forEach(session => {
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${session.name}</td>
+            <td>${session.mode}</td>
+            <td>${session.difficulty}</td>
+            <td>${session.duration}s</td>
+            <td class="history-table__score">${session.score}</td>
+            <td>${session.accuracy}</td>
+        `
+        historyTableBody.appendChild(row);
+    })
+}
