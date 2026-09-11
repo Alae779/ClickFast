@@ -44,10 +44,15 @@
       </div>
 
       <div class="home-grid">
-        <div class="panel panel--record">
-          <span class="panel__label">Current record</span>
-          <span class="stat-number stat-number--lg">128</span>
-          <span class="panel__caption">Classic · Medium · 10s</span>
+        <div class="home-record-grid">
+          <div class="panel panel--record">
+            <span class="panel__label">Classic record</span>
+            <span class="stat-number stat-number--lg" id="home-classic-record">0</span>
+          </div>
+          <div class="panel panel--record">
+            <span class="panel__label">Precision record</span>
+            <span class="stat-number stat-number--lg" id="home-precision-record">0</span>
+          </div>
         </div>
 
         <div class="panel panel--rules">
@@ -86,6 +91,7 @@
         <div class="field">
           <label class="field__label" for="pseudo">Player name</label>
           <input class="field__input" id="pseudo" name="pseudo" type="text" placeholder="2–20 characters" maxlength="20">
+          <p class="field__error hidden" id="pseudo-error">Name must be 2–20 characters.</p>
         </div>
 
         <div class="field">
@@ -131,8 +137,8 @@
 
       <div class="hud">
         <div class="hud__stat">
-          <span class="hud__label" id="time-display">Time</span>
-          <span class="stat-number">10</span>
+          <span class="hud__label">Time</span>
+          <span class="stat-number" id="time-display">10</span>
         </div>
         <div class="hud__stat">
           <span class="hud__label">Score</span>
@@ -140,15 +146,15 @@
         </div>
         <div class="hud__stat">
           <span class="hud__label">Record</span>
-          <span class="stat-number">128</span>
+          <span class="stat-number" id="record-display">128</span>
         </div>
-        <div class="hud__stat">
+        <div class="hud__stat hidden" id="misses-display-game">
           <span class="hud__label">Misses</span>
-          <span class="stat-number stat-number--danger">3</span>
+          <span class="stat-number stat-number--danger" id="misses-display">0</span>
         </div>
-        <div class="hud__stat">
+        <div class="hud__stat hidden" id="accuracy-display-game">
           <span class="hud__label">Accuracy</span>
-          <span class="stat-number">82%</span>
+          <span class="stat-number" id="accuracy-display">0%</span>
         </div>
       </div>
 
@@ -169,23 +175,23 @@
     <div class="view__inner">
 
       <div class="view-head">
-        <span class="results-badge">New record</span>
+        <span class="results-badge hidden" id="recordBadge">New record</span>
         <h2 class="view-head__title">Round complete</h2>
-        <p class="view-head__sub">Classic · Medium · 10s — played as Nova</p>
+        <p class="view-head__sub" id="results-sub">Classic · Medium · 10s — played as Nova</p>
       </div>
 
       <div class="results-grid">
         <div class="panel panel--result">
           <span class="panel__label">Score</span>
-          <span class="stat-number stat-number--xl stat-number--accent">31</span>
+          <span class="stat-number stat-number--xl stat-number--accent" id="results-score">31</span>
         </div>
         <div class="panel panel--result">
           <span class="panel__label">Misses</span>
-          <span class="stat-number stat-number--xl">Not measured</span>
+          <span class="stat-number stat-number--xl" id="results-misses">Not measured</span>
         </div>
         <div class="panel panel--result">
           <span class="panel__label">Accuracy</span>
-          <span class="stat-number stat-number--xl">Not measured</span>
+          <span class="stat-number stat-number--xl" id="results-accuracy">Not measured</span>
         </div>
       </div>
 
